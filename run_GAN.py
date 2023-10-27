@@ -8,8 +8,6 @@ import torch
 torch.backends.cudnn.benchmark = True
 
 # import self-defined functions
-# from generator import Generator_simple, genNoise, genNoise_reduce, plot_GAN_training, trainGAN, trainGAN_RNN, trainGPGAN_RNN
-# from predictor import train_prediction, plot_prediction_error, plot_prediction_sites
 import GAN
 import matplotlib.pyplot as plt
 from datetime import datetime
@@ -46,7 +44,6 @@ GAN_CNN = ~GAN_RNN
 PRED_RNN = True
 PRED_CNN = ~PRED_RNN
 GAN_PLOT = False
-# NUM_FEATURE = 3 # number of training features (1-8)
 COLS_FEATURES = ['initial_N_rate', 'other_N', 'day_cos', 'day_sin' ,'SRAD','DTTD','N_uptake',  'TMAX', 'TMIN']
 
 dataset_filename = "data/data_AGAI_DSSAT_scale.csv"
@@ -84,45 +81,35 @@ PRED_EPOCH = 300
 all_error_noGAN = np.zeros(PRED_EPOCH) 
 all_error_GAN = np.zeros(PRED_EPOCH)
 all_error_GAN_vanilla = np.zeros(PRED_EPOCH)
-# all_error_GAN_cond = np.zeros(PRED_EPOCH)
 all_error_GAN_WGAN = np.zeros(PRED_EPOCH)
 
 all_loss_noGAN = np.zeros(PRED_EPOCH) 
 all_loss_GAN = np.zeros(PRED_EPOCH)
 all_loss_GAN_vanilla = np.zeros(PRED_EPOCH)
-# all_error_GAN_cond = np.zeros(PRED_EPOCH)
 all_loss_GAN_WGAN = np.zeros(PRED_EPOCH)
 
 all_R2_noGAN = np.zeros(PRED_EPOCH) 
 all_R2_GAN = np.zeros(PRED_EPOCH)
 all_R2_GAN_vanilla = np.zeros(PRED_EPOCH)
-# all_R2_GAN_cond = np.zeros(PRED_EPOCH)
 all_R2_GAN_WGAN = np.zeros(PRED_EPOCH)
 
 
-NUM_MC = 5
+NUM_MC = 50
 for m in range(NUM_MC):
-    # print(f'running pass:{m:3d}')
-
+    
     error_noGAN, r2_noGAN = GAN.train_noGAN(GAN_BATCH_SIZE, SEQ_SIZE,DAY_STEP, GAN_NUM_EPOCH, GAN_NUM_DATA, GAN_TRAIN_RATE,GEN_input_size, GEN_hidden_size, GEN_num_layer, GEN_dropout_prob, GEN_lr,DIS_hidden_size, DIS_num_layer, DIS_dropout_prob, DIS_lr,PRED_lr,PRED_EPOCH, K_STEP,COLS_FEATURES)
     error_GPGAN, r2_GPGAN = GAN.trainGPGAN(GAN_BATCH_SIZE, SEQ_SIZE,DAY_STEP, GAN_NUM_EPOCH, GAN_NUM_DATA, GAN_TRAIN_RATE,GEN_input_size, GEN_hidden_size, GEN_num_layer, GEN_dropout_prob, GEN_lr,DIS_hidden_size, DIS_num_layer, DIS_dropout_prob, DIS_lr, PRED_lr,PRED_EPOCH, K_STEP,COLS_FEATURES)
     loss_d_GAN_vanilla, loss_g_GAN_vanilla, error_GAN_vanilla, r2_GAN_vanilla = GAN.trainGAN_vanilla(GAN_BATCH_SIZE,DAY_STEP, SEQ_SIZE, GAN_NUM_EPOCH, GAN_NUM_DATA, GAN_TRAIN_RATE,GEN_input_size, GEN_hidden_size, GEN_num_layer, GEN_dropout_prob, GEN_lr,DIS_hidden_size, DIS_num_layer, DIS_dropout_prob, DIS_lr, PRED_lr,PRED_EPOCH, K_STEP,COLS_FEATURES)
     loss_d_GAN_WGAN, loss_g_GAN_WGAN, error_GAN_WGAN, r2_GAN_WGAN = GAN.trainGAN_WGAN(GAN_BATCH_SIZE, SEQ_SIZE,DAY_STEP, GAN_NUM_EPOCH, GAN_NUM_DATA, GAN_TRAIN_RATE,GEN_input_size, GEN_hidden_size, GEN_num_layer, GEN_dropout_prob, GEN_lr,GAN_clip_value, GAN_n_critic, DIS_hidden_size, DIS_num_layer, DIS_dropout_prob, DIS_lr, PRED_lr,PRED_EPOCH, K_STEP,COLS_FEATURES)
-    # error_GAN_cond, r2_GAN_cond = GAN.trainGAN_Cond(GAN_BATCH_SIZE, SEQ_SIZE,DAY_STEP, GAN_NUM_EPOCH, GAN_NUM_DATA, GAN_TRAIN_RATE,GEN_input_size,GEN_cond_dim, GEN_hidden_size, GEN_num_layer, GEN_dropout_prob, GEN_lr,DIS_hidden_size, DIS_num_layer, DIS_dropout_prob, DIS_lr, PRED_lr,PRED_EPOCH, K_STEP,COLS_FEATURES)
-
-    # print(f'[exp-{m}] rmse (noGAN): {error_noGAN[-1]:.4f} | (GAN vanilla): {error_GAN_vanilla[-1]:.4f} | (GPGAN): {error_GPGAN[-1]:.4f} | (WGAN): {error_GAN_WGAN[-1]:.4f}') 
-    # print(f'[exp-{m}] R2 (noGAN): {r2_noGAN[-1]:.4f} | (GAN vanilla): {r2_GAN_vanilla[-1]:.4f} | (GPGAN): {r2_GPGAN[-1]:.4f} | (WGAN): {r2_GAN_WGAN[-1]:.4f}') 
     
     all_error_noGAN += (error_noGAN) 
     all_error_GAN += (error_GPGAN[-PRED_EPOCH:])
     all_error_GAN_vanilla += error_GAN_vanilla
-    # all_error_GAN_cond += error_GAN_cond
     all_error_GAN_WGAN += error_GAN_WGAN
 
     all_R2_noGAN    += r2_noGAN
     all_R2_GAN      +=  r2_GPGAN[-PRED_EPOCH:]
     all_R2_GAN_vanilla += r2_GAN_vanilla
-    # all_R2_GAN_cond += r2_GAN_cond
     all_R2_GAN_WGAN += r2_GAN_WGAN
 
 
@@ -130,9 +117,7 @@ for m in range(NUM_MC):
     ax.semilogy(error_noGAN, linestyle='-', color='b', label=f'noGAN : {error_noGAN[-1]:.4f}')
     ax.semilogy(error_GPGAN[-PRED_EPOCH:], linestyle='-', color='r', label=f'GPGAN : {error_GPGAN[-1]:.4f}')
     ax.semilogy(error_GAN_vanilla, linestyle='-', color='g', label=f'GAN vanilla : {error_GAN_vanilla[-1]:.4f}')
-    # ax.semilogy(error_GAN_cond, linestyle='-', color='m', label=f'CGAN : {error_GAN_cond[-1]:.4f}')
     ax.semilogy(error_GAN_WGAN, linestyle='-', color='y', label=f'WGAN : {error_GAN_WGAN[-1]:.4f}')
-    # ax.set_ylim(0,1)
     ax.set_ylim(1e-2, 1)
     ax.set_xlabel('Epoch')
     ax.set_ylabel('Test RMSE')
@@ -163,13 +148,11 @@ for m in range(NUM_MC):
 avg_error_noGAN = (all_error_noGAN) / NUM_MC
 avg_error_GAN = (all_error_GAN) / NUM_MC
 avg_error_GAN_vanilla = (all_error_GAN_vanilla) / NUM_MC
-# avg_error_GAN_cond = (all_error_GAN_cond) / NUM_MC
 avg_error_GAN_WGAN = (all_error_GAN_WGAN) / NUM_MC
 
 all_R2_noGAN    = all_R2_noGAN / NUM_MC
 all_R2_GAN      =  all_R2_GAN / NUM_MC
 all_R2_GAN_vanilla = all_R2_GAN_vanilla / NUM_MC
-# all_R2_GAN_cond = all_R2_GAN_cond / NUM_MC
 all_R2_GAN_WGAN = all_R2_GAN_WGAN / NUM_MC
 
 print(f'[AVG] rmse (noGAN): {avg_error_noGAN[-1]:.4f} | (GAN vanilla): {avg_error_GAN_vanilla[-1]:.4f} | (GPGAN): {avg_error_GAN[-1]:.4f} | (WGAN): {avg_error_GAN_WGAN[-1]:.4f}') 
@@ -193,7 +176,6 @@ fig, ax = plt.subplots()
 ax.semilogy(avg_error_noGAN, linestyle='-', color='b', label=f'noGAN : {avg_error_noGAN[-1]:.4f}')
 ax.semilogy(avg_error_GAN, linestyle='-', color='r', label=f'GPGAN : {avg_error_GAN[-1]:.4f}')
 ax.semilogy(avg_error_GAN_vanilla, linestyle='-', color='g', label=f'GAN vanilla: {avg_error_GAN_vanilla[-1]:.4f}')
-# ax.semilogy(avg_error_GAN_cond, linestyle='-', color='m', label=f'CGAN : {avg_error_GAN_cond[-1]:.4f}')
 ax.semilogy(avg_error_GAN_WGAN, linestyle='-', color='y', label=f'WGAN: {avg_error_GAN_WGAN[-1]:.4f}')
 
 # ax.set_ylim(0,1)
