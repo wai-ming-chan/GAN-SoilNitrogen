@@ -1,4 +1,3 @@
-# GAN_Soil_Nitrogen_Learning
 # GAN Soil Nitrogen Prediction in Precision Agriculture
 
 ## Introduction
