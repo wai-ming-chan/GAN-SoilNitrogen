@@ -53,6 +53,6 @@ We welcome contributions from the community! If you'd like to contribute to the 
 This project is licensed under the MIT License - see the LICENSE.md file for details.
 
 ## Acknowledgments
--Special thanks to [Name or Organization] for providing the initial dataset.
--Gratitude to all contributors who have invested their time in improving this project.
--Acknowledgment to [Related Research Paper or Project] that inspired this work.
+- Special thanks to DSSAT<https://github.com/DSSAT/dssat-csm-os/tree/v4.8.2.0> for providing the simulator to generate the dataset.
+- Gratitude to all contributors who have invested their time in improving this project.
+- Acknowledgment to [Related Research Paper or Project] that inspired this work.
