@@ -43,11 +43,11 @@ To use this project for soil nitrogen prediction, follow these steps:
 ## Contributing
 We welcome contributions from the community! If you'd like to contribute to the GAN Soil Nitrogen Prediction project, please follow these steps:
 
--Fork the repository on GitHub.
--Create a new branch for your feature or fix.
--Commit your changes to the branch.
--Push your branch to GitHub.
--Submit a pull request to the main repository.
+- Fork the repository on GitHub.
+- Create a new branch for your feature or fix.
+- Commit your changes to the branch.
+- Push your branch to GitHub.
+- Submit a pull request to the main repository.
 
 ## License
 This project is licensed under the MIT License - see the LICENSE.md file for details.
