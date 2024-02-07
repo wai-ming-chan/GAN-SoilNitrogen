@@ -17,7 +17,7 @@ To get started with this project, follow these steps to install and set up your 
 
 1. Clone the repository to your local machine:
    ```shell
-   git clone https://github.com/your-username/GAN-SoilNitrogen.git
+   git clone https://github.com/wai-ming-chan/GAN-SoilNitrogen.git
     ```
 
 ### Usage
@@ -43,11 +43,11 @@ To use this project for soil nitrogen prediction, follow these steps:
 ## Contributing
 We welcome contributions from the community! If you'd like to contribute to the GAN Soil Nitrogen Prediction project, please follow these steps:
 
-- Fork the repository on GitHub.
-- Create a new branch for your feature or fix.
-- Commit your changes to the branch.
-- Push your branch to GitHub.
-- Submit a pull request to the main repository.
+1. Fork the repository on GitHub.
+2. Create a new branch for your feature or fix.
+3. Commit your changes to the branch.
+4. Push your branch to GitHub.
+5. Submit a pull request to the main repository.
 
 ## License
 This project is licensed under the MIT License - see the LICENSE.md file for details.
