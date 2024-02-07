@@ -40,7 +40,7 @@ To use this project for soil nitrogen prediction, follow these steps:
     ```
     This will save the generated data in the specified output directory.
 
-##Contributing
+## Contributing
 We welcome contributions from the community! If you'd like to contribute to the GAN Soil Nitrogen Prediction project, please follow these steps:
 
 -Fork the repository on GitHub.
@@ -49,10 +49,10 @@ We welcome contributions from the community! If you'd like to contribute to the 
 -Push your branch to GitHub.
 -Submit a pull request to the main repository.
 
-##License
+## License
 This project is licensed under the MIT License - see the LICENSE.md file for details.
 
-##Acknowledgments
+## Acknowledgments
 -Special thanks to [Name or Organization] for providing the initial dataset.
 -Gratitude to all contributors who have invested their time in improving this project.
 -Acknowledgment to [Related Research Paper or Project] that inspired this work.
