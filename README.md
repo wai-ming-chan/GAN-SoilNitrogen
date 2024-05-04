@@ -19,9 +19,6 @@ Farm site 1 | Farm site 2 | Farm site 3
 ![](./figs/soilIN_pred_site04.png)  |  ![](./figs/soilIN_pred_site31.png) | ![](./figs/soilIN_pred_site14.png)
 
 
-## License
-This project is licensed under the MIT License - see the LICENSE.md file for details.
-
 ## Acknowledgments
 - Special thanks to [Decision Support System for Agrotechnology Transfer (DSSAT)](https://github.com/DSSAT/dssat-csm-os/tree/v4.8.2.0) for providing the simulator to generate the dataset.
 - Gratitude to all contributors who have invested their time in improving this project.
