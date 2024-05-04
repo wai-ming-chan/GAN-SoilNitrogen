@@ -1,5 +1,7 @@
 # GAN Soil Nitrogen Prediction in Precision Agriculture
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) This repository contains the code for the Agricultural AI project.
+
 ## Introduction
 This project aims to develop a Generative Adversarial Network (GAN) model for soil nitrogen prediction in precision agriculture. By leveraging advanced deep-learning techniques, we introduce an innovative approach to generate synthetic soil nitrogen data that can enhance the accuracy of nitrogen predictions in agricultural fields. Our GAN model is designed to learn from diverse datasets and produce high-quality synthetic data that can be used to optimize nitrogen usage and improve sustainable farming practices.
 
